@@ -9,14 +9,11 @@
 
         <title><tiles:getAsString name="title" /></title>
 
-        <!-- Latest compiled and minified CSS 3.2.0 -->
-        <link rel="stylesheet" href='<c:url value="/public/css/bootstrap.min.css" />'>
-        
-        <!-- Optional theme bootstrap-theme.min.css -->
-        <link rel="stylesheet" href='<c:url value="/public/css/bootstrap-theme.min.css"/>'>
+        <tilesx:useAttribute id="files" name="cssfiles" classname="java.util.List" />
+        <c:forEach var="file" items="${files}">
+          <link rel="stylesheet" href='<c:url value="${file}"/>'>
+        </c:forEach>
 
-        <link rel="stylesheet" href='<c:url value="/public/css/site.css"/>'>
-        
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>

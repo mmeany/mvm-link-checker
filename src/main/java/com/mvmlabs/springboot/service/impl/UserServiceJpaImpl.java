@@ -5,6 +5,7 @@ import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,15 @@ public class UserServiceJpaImpl implements UserService {
     @Override
     public User loadUserById(final Long id) {
         return userRepository.findOne(id);
+    }
+
+    @Override
+    public User currentUser() {
+        Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (o instanceof User) {
+            return (User) o;
+        }
+        return null;
     }
     
 }

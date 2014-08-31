@@ -36,6 +36,8 @@
                 <li class="divider"></li>
 	            <li><a href="<c:url value="/admin/greet/Jane" />">Admin as Jane</a></li>
                 <li class="divider"></li>
+                <li><a href="<c:url value="/admin/link/list" />">List links</a></li>
+                <li><a href="<c:url value="/admin/tag/list" />">List tags</a></li>
                 <li><a href="<c:url value="/admin/user/list" />">List users</a></li>
 	            <li class="divider"></li>
 		        <li><a href='<c:url value="/logout" />'>Sign out</a></li>

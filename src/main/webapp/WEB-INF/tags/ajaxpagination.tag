@@ -8,11 +8,11 @@
         <ul class="pagination mvm-no-margin">
             <cr:choose>
                 <cr:when test="${page.isFirst()}"><li class="disabled"><a href="javascript:mvmNOP();">|&lt;</a></li></cr:when>
-                <cr:otherwise><li><a href="<c:url value=""><c:param name="page" value="0"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" title="first">|&lt;</a></li></cr:otherwise>
+                <cr:otherwise><li><a href="<c:url value=""><c:param name="page" value="0"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" data-ajax-load="#ajaxload" title="first">|&lt;</a></li></cr:otherwise>
             </cr:choose>
             <cr:choose>
                 <cr:when test="${page.isFirst()}"><li class="disabled"><a href="javascript:mvmNOP();">&lt;</a></li></cr:when>
-                <cr:otherwise><li><a href="<c:url value=""><c:param name="page" value="${page.number - 1}"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" title="prev">&lt;</a></li></cr:otherwise>
+                <cr:otherwise><li><a href="<c:url value=""><c:param name="page" value="${page.number - 1}"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" data-ajax-load="#ajaxload" title="prev">&lt;</a></li></cr:otherwise>
             </cr:choose>
 
 	        <c:set var="startPage" value="0"/>
@@ -48,11 +48,11 @@
 
             <c:choose>
                 <c:when test="${page.number == page.totalPages - 1}"><li class="disabled"><a href="javascript:mvmNOP();">&gt;</a></li></c:when>
-                <c:otherwise><li><a href="<c:url value=""><c:param name="page" value="${page.number + 1}"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" title="next">&gt;</a></li></c:otherwise>
+                <c:otherwise><li><a href="<c:url value=""><c:param name="page" value="${page.number + 1}"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" data-ajax-load="#ajaxload" title="next">&gt;</a></li></c:otherwise>
             </c:choose>
             <cr:choose>
                 <cr:when test="${page.isLast()}"><li class="disabled"><a href="javascript:mvmNOP();">&gt;|</a></li></cr:when>
-                <cr:otherwise><li><a href="<c:url value=""><c:param name="page" value="${page.totalPages - 1}"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" title="last">&gt;|</a></li></cr:otherwise>
+                <cr:otherwise><li><a href="<c:url value=""><c:param name="page" value="${page.totalPages - 1}"/><c:param name="size" value="${page.size}"/><c:param name="criteria" value=""/></c:url>" data-ajax-load="#ajaxload" title="last">&gt;|</a></li></cr:otherwise>
             </cr:choose>
         </ul>
         </c:if>

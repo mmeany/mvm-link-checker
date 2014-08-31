@@ -15,4 +15,6 @@ public interface UserService extends UserDetailsService {
     void save(User user);
 
     User loadUserById(Long id);
+    
+    User currentUser();
 }

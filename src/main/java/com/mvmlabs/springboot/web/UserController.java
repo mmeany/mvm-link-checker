@@ -63,7 +63,7 @@ public class UserController {
     @RequestMapping(value="/admin/user/add", method = RequestMethod.GET)
     public ModelAndView addForm() {
         logger.debug("Add new user form requested.");
-        return new ModelAndView(USER_DETAILS_FORM_VIEW_NAME, "user", new User());
+        return new ModelAndView(USER_DETAILS_FORM_VIEW_NAME, "user", new UserForm());
     }
     
     @RequestMapping(value="/admin/user/edit/{id}", method = RequestMethod.GET)
@@ -92,6 +92,10 @@ public class UserController {
         if (binding.hasErrors()) {
             return USER_DETAILS_FORM_VIEW_NAME;
         }
+        
+        // TODO: There is a bug here, the version field is not being respected. It
+        // should be saved in the form and used to check for updates to underlying
+        // object.
         final User user = userService.loadUserById(form.getId());
         form.update(user);
         userService.save(user);

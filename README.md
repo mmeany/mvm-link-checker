@@ -1,94 +1,76 @@
 Overview
 ========
-This is a starter application based on Spring Boot, including the following technologies already baked in:
+Based on starter application.
 
-* Spring Web MVC 4
-* Spring Security with a custom UserDetailsService that authenticates against the HSQL Database
-* Apache Tiles 3
-* Spring Data JPA
-* HSQL Database, embedded with persistent store on disk
-* Twitter Bootstrap
-* JQuery and JQuery Validation
+Maintain a list of URLs that can be checked for HTTP success invocations.
 
-First Time Database Configuation
-================================
-File mentioned here can be found in: src/main/resources
+Records status of the call, including: output, duration, size, HTTP status code.
 
-To create the database on first run of the application change line 6 of application.properties from:
-
-    spring.jpa.hibernate.ddl-auto: 
-
-to:
-
-    spring.jpa.hibernate.ddl-auto: create
-
-This will cause the database to be dropped and recreated, deleting it if it exists. To get the test data loaded as the same time,
-make a copy of data-hidden.sql in the same directory and name it data.sql.
-
-Don't forget to change application.properies back to its initial state and delete data.sql once you have recreated the database.
-
-Making user details available through Tiles
-===========================================
-See the Tiles configuration for customised View Preparer that makes the currently signed in user object available as an attribute that cascades. This is defined on the basic.jsp template making it available to all pages and in particular is used in the header.jsp to display the signed in message.
-
-Custom Tags
-===========
-In the src/main/webapp/WEB-INF/tags folder are some custom tags. Of interest here is the pagination tag that can be used in conjunction with Spring Data Page and Pageable implementations to provide a quick and easy means of paginating through a data set. The List controller and view provide an example.
-
-Pagination
-The pagination tag is a bit of a monster, so much easier to do this in code, but there you go :)
-
-To use the tag, put it on a page which has a Spring Data 'Page' object in the model as attribute 'page'.
-
-JavaScript Enhancements
+Initial Random Thoughts
 =======================
-There is a customisation that is run on page load that adds an on-click handler to any <a> tags decorated with a data-ajax-load attribute. Such links will load data into the current page using JQuery Ajax. The value of the data-ajax-load attribute should be the id of the load target (a DIV for example). JQuery goes further than this and will look at the loaded data to see if it contains an element with the same id and if so will extract the content of that element and inject it in the element with corresponding name in the current document. This gives smooth page transitions, but there are caveats - the browser location is not updated to reflect the loaded data.
 
-The site javascript also adds an on-load event that see if there is a function called pageInit() defined on the current page. If so, that function is invoked, with no parameters. This provides a easy means of defining a block of Javascript that has to run when a page is loaded without having to worry where that code is located, it can be in a JS file or in the body tile.
+Anyone can view results.
+Registered users can initiate a link check
+Admins can add URLs and Tags
 
-JQuery Form Validation is included and can be seen on the login page. see http://jqueryvalidation.org/documentation/#list-of-built-in-validation-methods
+From a result list an individual failed entry can be retried. The result set will capture multiple results per URL, defaulting to display of most recent result.
 
-Likewise, automatic Spring validation is included and can be seen on the login page.
+URLs can have tags applied to them.
+All URLs with a specific tag can be run as a job.
+Every URL has the 'all' tag applied and it cannot be removed.
 
-Issues
-======
-Known issues - try to resolve, but not show stoppers
+At present, only provide simple HTTP GET requests for the URLs. A point of expansion would be to provide POST services and dynamic substitution of certain fields, possibly from config or even better from a script (similar to how JMeter works).
 
-. When paging through a list of results the location bar does not change. Unable to bookmark a
-  specific page of results.
+A Result stores the tag that was used to launch it, plus the user that invoked it.
 
-Todo
-====
-This project will not be considered finished until the following items have been completed.
+Results can be viewed chronologically and filtered by tag or user
 
-. Allow UserAuthorities to be selected from list of all available
-. Implement a custom validator for cross field checks
+Application of one tag could be configured to automatically include one or more other tags. For example, a server name tag could apply an environment tag at the same time: server-b would add tag UAT.
 
-Done
-====
-This sections contains entries from the Todo section copied into it once they have been completed.
+In later phase add ability to schedule a link check to run periodically using Quartz scheduler or similar.
 
-. UserAthorities - remove the numeric primary key as it is not needed
-. Implement JQuery form validation
-. Change logging implementation to slf4j using log4j.
+In later phase add ability to plug in a failure notification handler so people can be notified about failures (eMail, SMS, PUSH to mobile app etc.)
+This could prove interesting: Notification levels (WARN, ERROR etc). Repeat Notification monitor (ignore until 2 successive failures). Notification periods (Send SMS out of hours for example).
 
-Nice to have
-============
+Notes
+=====
 
-. JQuery validation to use same messages as server side validator.
-. Internationalise
-. Separate UserAuthorities and Roles. A Role would comprise of a collection of authorities.
-. Code generation, Velocity based, for adding new forms and controllers
+URL:    id              |- Primary Key
+        address
+        method          (only GET supported at present)
+        name
+        description
+        date added
+        added by
+        date updated
+        updated by
 
-Documentation
-=============
-. How to add a new view to tiles
-. The custom Form tags - what and why
-. How to add a new form
-  . Model object and jpa annotations
-  . Form object and validation annotations
-  . JSP form and JQuery validation
-  . Controller
-    . Injection of domain objects
-    . Javax validation
-. About Spring Data repositories
+TAG:    name            |- Primary Key
+        description
+        implied         (List of other tags to apply when this one is)
+
+TAGCLOUD: tag           |- Primary Key
+        url             |
+        date added
+        added by
+        
+RUNLOG: id              |- Primary Key
+        tags
+        user
+        date started
+        date ended
+        total
+        failures
+
+Result: runlog          |
+        url             |- Primary Key
+        attempt         |
+        response code
+        response body
+        response headers
+        response size
+        time taken
+        success flag
+
+
+

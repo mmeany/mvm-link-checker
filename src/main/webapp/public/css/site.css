@@ -4,3 +4,15 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
+
+.mvm-no-margin {
+	margin: 0;
+}
+
+.mvm-top-margin-2 {
+	margin-top: 2px;
+}
+
+.mvm-padding-5 {
+	padding: 5px;
+}
