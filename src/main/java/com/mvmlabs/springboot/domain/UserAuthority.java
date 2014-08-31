@@ -15,8 +15,8 @@ public class UserAuthority implements GrantedAuthority {
 
     @Id
     @Column(nullable = false)
-    private String authority;
-    
+    private String            authority;
+
     public UserAuthority() {
     }
 
@@ -28,13 +28,13 @@ public class UserAuthority implements GrantedAuthority {
     public String getAuthority() {
         return authority;
     }
-    
-    public void setAuthority(String authority) {
+
+    public void setAuthority(final String authority) {
         this.authority = authority;
     }
 
     @Override
     public boolean equals(final Object obj) {
-        return obj != null && authority != null && obj instanceof UserAuthority && getAuthority().equals(((UserAuthority)obj).getAuthority());
+        return (obj != null) && (authority != null) && (obj instanceof UserAuthority) && getAuthority().equals(((UserAuthority) obj).getAuthority());
     }
 }

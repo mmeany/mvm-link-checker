@@ -10,32 +10,32 @@ import com.mvmlabs.springboot.domain.User;
 
 public class UserForm {
 
-    @Digits(integer=8, fraction=0)
-    private Long id;
+    @Digits(integer = 8, fraction = 0)
+    private Long    id;
 
-    @Digits(integer=8, fraction=0)
-    private Long version;
-    
+    @Digits(integer = 8, fraction = 0)
+    private Long    version;
+
     @NotNull
     @Size(min = 3, max = 80)
-    private String name;
+    private String  name;
 
     @NotNull
     @Size(min = 6, max = 20)
-    private String username;
-    
-    @Size(min = 8, max = 20)
-    private String password;
+    private String  username;
 
     @Size(min = 8, max = 20)
-    private String confirm;
+    private String  password;
+
+    @Size(min = 8, max = 20)
+    private String  confirm;
 
     private boolean enabled;
-    
+
     private boolean administrator;
 
     public UserForm() {
-        
+
     }
 
     /** Populate fields from supplied user. */
@@ -49,12 +49,12 @@ public class UserForm {
         setEnabled(user.isEnabled());
         setAdministrator(user.isAdministrator());
     }
-    
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -62,7 +62,7 @@ public class UserForm {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 
@@ -70,7 +70,7 @@ public class UserForm {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = emptyAsNull(name);
     }
 
@@ -78,7 +78,7 @@ public class UserForm {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = emptyAsNull(username);
     }
 
@@ -86,7 +86,7 @@ public class UserForm {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = emptyAsNull(password);
     }
 
@@ -94,7 +94,7 @@ public class UserForm {
         return confirm;
     }
 
-    public void setConfirm(String confirm) {
+    public void setConfirm(final String confirm) {
         this.confirm = emptyAsNull(confirm);
     }
 
@@ -102,7 +102,7 @@ public class UserForm {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -110,25 +110,25 @@ public class UserForm {
         return administrator;
     }
 
-    public void setAdministrator(boolean administrator) {
+    public void setAdministrator(final boolean administrator) {
         this.administrator = administrator;
     }
 
     private String emptyAsNull(final String value) {
-        return (value == null || value.trim().length() == 0) ? null : value;
+        return ((value == null) || (value.trim().length() == 0)) ? null : value;
     }
-    
+
     /**
      * Update the user with values from this form.
-     * 
+     *
      * @param user
      */
-    public void update(User user) {
+    public void update(final User user) {
         user.setId(getId());
         user.setVersion(getVersion());
         user.setName(getName());
         user.setUsername(getUsername());
-        if (password != null && confirm != null && password.equals(confirm)) {
+        if ((password != null) && (confirm != null) && password.equals(confirm)) {
             user.setPassword(getPassword());
         }
         user.setEnabled(isEnabled());

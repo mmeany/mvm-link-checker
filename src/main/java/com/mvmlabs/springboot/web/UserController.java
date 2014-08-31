@@ -21,58 +21,55 @@ import com.mvmlabs.springboot.service.UserService;
 import com.mvmlabs.springboot.web.form.UserForm;
 
 /**
- * Controller that demonstrates:
- *  tiles mapping,
- *  request parameters and path variables.
- *  Constructor injection of autowired services
- * 
+ * Controller that demonstrates: tiles mapping, request parameters and path variables. Constructor injection of autowired services
+ *
  * @author Mark Meany
  */
 @Controller
 public class UserController {
     /** Logger implementation. */
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger       logger                      = LoggerFactory.getLogger(this.getClass());
 
-    public static final String LIST_USERS_VIEW_NAME  = "user.list";
-    
-    public static final String VIEW_USERS_VIEW_NAME  = "user.view";
-    
+    public static final String LIST_USERS_VIEW_NAME        = "user.list";
+
+    public static final String VIEW_USERS_VIEW_NAME        = "user.view";
+
     public static final String USER_DETAILS_FORM_VIEW_NAME = "user.form";
-    
-	public static final String SUCCESS_REDIRECT_TEMPLATE = "redirect:/admin/user/view/%d";
-	
-	private final UserService userService;
-	
-	@Autowired
-	public UserController(final UserService userService) {
-	    this.userService = userService;
-	}
-			
-    @RequestMapping(value = "/admin/user/list", method=RequestMethod.GET)
-	public ModelAndView list(@PageableDefault(page = 0, value = 5) final Pageable pageable) {
-        logger.debug("List requested.");
-	    return new ModelAndView(LIST_USERS_VIEW_NAME, "page", userService.getAllRegisteredUsers(pageable));
-	}
 
-    @RequestMapping(value="/admin/user/view/{id}", method = RequestMethod.GET)
+    public static final String SUCCESS_REDIRECT_TEMPLATE   = "redirect:/admin/user/view/%d";
+
+    private final UserService  userService;
+
+    @Autowired
+    public UserController(final UserService userService) {
+        this.userService = userService;
+    }
+
+    @RequestMapping(value = "/admin/user/list", method = RequestMethod.GET)
+    public ModelAndView list(@PageableDefault(page = 0, value = 5) final Pageable pageable) {
+        logger.debug("List requested.");
+        return new ModelAndView(LIST_USERS_VIEW_NAME, "page", userService.getAllRegisteredUsers(pageable));
+    }
+
+    @RequestMapping(value = "/admin/user/view/{id}", method = RequestMethod.GET)
     public ModelAndView view(@PathVariable("id") final User user) {
         logger.debug("View requested for user %d.", user.getId());
         return new ModelAndView(VIEW_USERS_VIEW_NAME, "user", user);
     }
 
-    @RequestMapping(value="/admin/user/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/user/add", method = RequestMethod.GET)
     public ModelAndView addForm() {
         logger.debug("Add new user form requested.");
         return new ModelAndView(USER_DETAILS_FORM_VIEW_NAME, "user", new UserForm());
     }
-    
-    @RequestMapping(value="/admin/user/edit/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/admin/user/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editForm(@PathVariable("id") final User user) {
         logger.debug("Edit user form requested for user %d.", user.getId());
         return new ModelAndView(USER_DETAILS_FORM_VIEW_NAME, "userForm", new UserForm(user));
     }
 
-    @RequestMapping(value="/admin/user/add", method=RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/add", method = RequestMethod.POST)
     public String saveAddUser(@Valid final UserForm form, final BindingResult binding) {
         logger.debug("New user form has been submitted.");
         if (binding.hasErrors()) {
@@ -82,17 +79,17 @@ public class UserController {
         user.setCreateDate(Calendar.getInstance());
         form.update(user);
         userService.save(user);
-        
+
         return getViewUserRedirectUrl(form.getId());
     }
 
-    @RequestMapping(value="/admin/user/edit/{id}", method=RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/edit/{id}", method = RequestMethod.POST)
     public String saveEditUser(@Valid final UserForm form, final BindingResult binding) {
         logger.debug("Edit user form has been submitted for user %d.", form.getId());
         if (binding.hasErrors()) {
             return USER_DETAILS_FORM_VIEW_NAME;
         }
-        
+
         // TODO: There is a bug here, the version field is not being respected. It
         // should be saved in the form and used to check for updates to underlying
         // object.

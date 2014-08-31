@@ -13,10 +13,10 @@ import javax.persistence.ManyToMany;
 public class Tag {
 
     @Id
-    private String tag;
+    private String          tag;
 
     @Column(nullable = false)
-    private String description;
+    private String          description;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Tag> implied;
@@ -40,7 +40,7 @@ public class Tag {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -51,7 +51,7 @@ public class Tag {
         return implied;
     }
 
-    public void setImplied(Collection<Tag> implied) {
+    public void setImplied(final Collection<Tag> implied) {
         this.implied = implied;
     }
 }

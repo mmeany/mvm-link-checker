@@ -23,30 +23,30 @@ import javax.persistence.Version;
 public class LinkCheck {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long                  id;
 
     @Version
-    private Long version;
-    
+    private Long                  version;
+
     @ManyToOne
-    private User launchedBy;
-    
+    private User                  launchedBy;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar launchedDate;
-    
+    private Calendar              launchedDate;
+
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Tag> tags;
+    private Set<Tag>              tags;
 
     @Column(nullable = true)
-    private Integer totalLinksChecked;
-    
+    private Integer               totalLinksChecked;
+
     @Column(nullable = true)
-    private Integer totalInitialErrors;
-    
+    private Integer               totalInitialErrors;
+
     @Column(nullable = true)
-    private Integer totalFinalErrors;
+    private Integer               totalFinalErrors;
 
     @OneToMany
     private List<LinkCheckResult> results;
@@ -55,7 +55,7 @@ public class LinkCheck {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -63,7 +63,7 @@ public class LinkCheck {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 
@@ -71,7 +71,7 @@ public class LinkCheck {
         return launchedBy;
     }
 
-    public void setLaunchedBy(User launchedBy) {
+    public void setLaunchedBy(final User launchedBy) {
         this.launchedBy = launchedBy;
     }
 
@@ -79,7 +79,7 @@ public class LinkCheck {
         return launchedDate;
     }
 
-    public void setLaunchedDate(Calendar launchedDate) {
+    public void setLaunchedDate(final Calendar launchedDate) {
         this.launchedDate = launchedDate;
     }
 
@@ -90,7 +90,7 @@ public class LinkCheck {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(final Set<Tag> tags) {
         this.tags = tags;
     }
 
@@ -98,7 +98,7 @@ public class LinkCheck {
         return totalLinksChecked;
     }
 
-    public void setTotalLinksChecked(Integer totalLinksChecked) {
+    public void setTotalLinksChecked(final Integer totalLinksChecked) {
         this.totalLinksChecked = totalLinksChecked;
     }
 
@@ -106,7 +106,7 @@ public class LinkCheck {
         return totalInitialErrors;
     }
 
-    public void setTotalInitialErrors(Integer totalInitialErrors) {
+    public void setTotalInitialErrors(final Integer totalInitialErrors) {
         this.totalInitialErrors = totalInitialErrors;
     }
 
@@ -114,7 +114,7 @@ public class LinkCheck {
         return totalFinalErrors;
     }
 
-    public void setTotalFinalErrors(Integer totalFinalErrors) {
+    public void setTotalFinalErrors(final Integer totalFinalErrors) {
         this.totalFinalErrors = totalFinalErrors;
     }
 
@@ -125,7 +125,7 @@ public class LinkCheck {
         return results;
     }
 
-    public void setResults(List<LinkCheckResult> results) {
+    public void setResults(final List<LinkCheckResult> results) {
         this.results = results;
     }
 }

@@ -12,18 +12,18 @@ import com.mvmlabs.springboot.service.TagService;
 
 public class TagForm {
 
-    private String originalTag;
+    private String       originalTag;
 
     @NotNull
     @Size(min = 3, max = 40)
-    private String tag;
-    
+    private String       tag;
+
     @NotNull
     @Size(min = 3, max = 200)
-    private String description;
-    
+    private String       description;
+
     private List<String> implied;
-    
+
     public TagForm() {
     }
 
@@ -32,7 +32,7 @@ public class TagForm {
         this.originalTag = tag.getTag();
         this.description = tag.getDescription();
         if (tag.getImplied().size() > 0) {
-            for (Tag itag : tag.getImplied()) {
+            for (final Tag itag : tag.getImplied()) {
                 getImplied().add((itag.getTag()));
             }
         }
@@ -42,10 +42,10 @@ public class TagForm {
         tag.setTag(this.tag);
         tag.setDescription(this.description);
         if (getImplied().size() > 0) {
-            for(final String name : getImplied()) {
+            for (final String name : getImplied()) {
                 try {
                     tag.getImplied().add(tagService.getTag(name.trim()));
-                } catch(NotFoundException e) {
+                } catch (final NotFoundException e) {
                     // Could add this as a new tag
                 }
             }
@@ -56,7 +56,7 @@ public class TagForm {
         return tag;
     }
 
-    public void setTag(String tag) {
+    public void setTag(final String tag) {
         this.tag = tag;
     }
 
@@ -64,7 +64,7 @@ public class TagForm {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -75,7 +75,7 @@ public class TagForm {
         return implied;
     }
 
-    public void setImplied(List<String> implied) {
+    public void setImplied(final List<String> implied) {
         this.implied = implied;
     }
 
@@ -83,7 +83,7 @@ public class TagForm {
         return originalTag;
     }
 
-    public void setOriginalTag(String originalTag) {
+    public void setOriginalTag(final String originalTag) {
         this.originalTag = originalTag;
     }
 }

@@ -17,16 +17,16 @@ import com.mvmlabs.springboot.domain.User;
 import com.mvmlabs.springboot.service.UserService;
 
 @Service
-@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 public class UserServiceJpaImpl implements UserService {
 
     private final UserRepository userRepository;
-    
+
     @Autowired
     public UserServiceJpaImpl(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
+
     @Override
     public User registerVisit(final User user) {
         if (user != null) {
@@ -38,13 +38,13 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public Page<User> getAllRegisteredUsers(final Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
     }
@@ -61,11 +61,11 @@ public class UserServiceJpaImpl implements UserService {
 
     @Override
     public User currentUser() {
-        Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        final Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (o instanceof User) {
             return (User) o;
         }
         return null;
     }
-    
+
 }

@@ -15,21 +15,21 @@ import com.mvmlabs.springboot.service.NotFoundException;
 import com.mvmlabs.springboot.service.TagService;
 
 @Service
-@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 public class TagServiceJpaImpl implements TagService {
 
     @Autowired
     private TagRepository tagRepository;
-    
+
     @Override
     @Transactional(readOnly = true)
-    public Page<Tag> getAllTags(Pageable pageable) {
+    public Page<Tag> getAllTags(final Pageable pageable) {
         return tagRepository.findAll(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Tag getTag(String name) throws NotFoundException {
+    public Tag getTag(final String name) throws NotFoundException {
         final Tag tag = tagRepository.findOne(name);
         if (tag == null) {
             throw new NotFoundException(name);
@@ -43,13 +43,13 @@ public class TagServiceJpaImpl implements TagService {
     }
 
     @Override
-    public Tag rename(String originalName, Tag tag) {
+    public Tag rename(final String originalName, final Tag tag) {
         tagRepository.delete(originalName);
         return tagRepository.save(tag);
     }
 
     @Override
-    public List<Tag> findAllStartingWith(String criteria) {
+    public List<Tag> findAllStartingWith(final String criteria) {
         return tagRepository.findByTagStartingWithOrderByTagDesc(criteria);
     }
 
@@ -62,5 +62,5 @@ public class TagServiceJpaImpl implements TagService {
     public List<String> getAllTagNames() {
         return tagRepository.findAllTagNames();
     }
-    
+
 }

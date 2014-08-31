@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.mvmlabs.springboot.domain.Tag;
 
-public interface TagRepository extends PagingAndSortingRepository<Tag, String>{
+public interface TagRepository extends PagingAndSortingRepository<Tag, String> {
 
     List<Tag> findByTagStartingWithOrderByTagDesc(String criteria);
 

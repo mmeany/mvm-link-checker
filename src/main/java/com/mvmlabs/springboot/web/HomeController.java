@@ -11,14 +11,14 @@ public class HomeController {
 
     /** Logger implementation. */
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    @RequestMapping(value="/")
+
+    @RequestMapping(value = "/")
     public String root() {
         logger.debug("Root requested, going home.");
         return home();
     }
-    
-    @RequestMapping(value = "/home", method=RequestMethod.GET)
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home() {
         logger.debug("Home requested.");
         return "site.homepage";

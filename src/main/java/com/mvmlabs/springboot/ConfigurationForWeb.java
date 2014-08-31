@@ -19,15 +19,14 @@ public class ConfigurationForWeb extends WebMvcAutoConfigurationAdapter {
         registry.addInterceptor(userDetailInterceptor());
         super.addInterceptors(registry);
     }
-    
+
     public UserDetailInterceptor userDetailInterceptor() {
         return new UserDetailInterceptor();
     }
 
     /**
-     * An intereptor that pushes the current user UserDetails object into the request as an attribute
-     * named 'currentUser'.
-     * 
+     * An intereptor that pushes the current user UserDetails object into the request as an attribute named 'currentUser'.
+     *
      * @author Mark Meany
      */
     protected class UserDetailInterceptor extends HandlerInterceptorAdapter {

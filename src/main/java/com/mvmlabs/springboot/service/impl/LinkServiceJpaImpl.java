@@ -32,14 +32,14 @@ import com.mvmlabs.springboot.service.LinkService;
 public class LinkServiceJpaImpl implements LinkService {
 
     @Autowired
-    private LinkRepository linkRepository;
-    
+    private LinkRepository            linkRepository;
+
     @Autowired
-    private LinkCheckRepository linkCheckRepository;
-    
+    private LinkCheckRepository       linkCheckRepository;
+
     @Autowired
     private LinkCheckResultRepository linkCheckResultRepository;
-        
+
     @Override
     @Transactional(readOnly = true)
     public Page<Link> allLinksWithTag(final Pageable pageable, final Tag tag) {
@@ -72,18 +72,18 @@ public class LinkServiceJpaImpl implements LinkService {
         linkCheck.setTotalLinksChecked(1);
 
         LinkCheckResult linkCheckResult = things(link);
-        
+
         linkCheckResult = linkCheckResultRepository.save(linkCheckResult);
         linkCheck.getResults().add(linkCheckResult);
         linkCheck.setTotalInitialErrors(linkCheckResult.getSuccess() ? 1 : 0);
         linkCheck.setTotalFinalErrors(linkCheckResult.getSuccess() ? 1 : 0);
-        
+
         // Should the link check and result be stored separately or together?
         linkCheckRepository.save(linkCheck);
-        
+
         return linkCheck;
     }
-    
+
     private LinkCheckResult things(final Link link) {
 
         final CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -93,13 +93,14 @@ public class LinkServiceJpaImpl implements LinkService {
             // Create a custom response handler
             final ResponseHandler<LinkCheckResult> responseHandler = new ResponseHandler<LinkCheckResult>() {
 
+                @Override
                 public LinkCheckResult handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
                     final LinkCheckResult result = new LinkCheckResult();
                     result.setLink(link);
                     result.setAttempt(1);
-                    int status = response.getStatusLine().getStatusCode();
+                    final int status = response.getStatusLine().getStatusCode();
                     result.setResponseCode(status);
-                    if (status >= 200 && status < 300) {
+                    if ((status >= 200) && (status < 300)) {
                         result.setSuccess(true);
                         final HttpEntity entity = response.getEntity();
                         result.setResponseBody(entity != null ? EntityUtils.toString(entity) : null);
@@ -108,7 +109,7 @@ public class LinkServiceJpaImpl implements LinkService {
                         result.setErrorMessage("Invalid response " + status);
                         throw new ClientProtocolException("Unexpected response status: " + status);
                     }
-                    
+
                     return result;
                 }
             };
@@ -116,12 +117,12 @@ public class LinkServiceJpaImpl implements LinkService {
             final LinkCheckResult result = httpclient.execute(httpget, responseHandler);
             result.setTimeTakenMillis(System.currentTimeMillis() - millis);
             return result;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return new LinkCheckResult(link, e);
         } finally {
             try {
                 httpclient.close();
-            } catch (IOException e) {
+            } catch (final IOException e) {
             }
         }
     }

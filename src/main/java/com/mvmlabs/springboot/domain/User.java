@@ -20,54 +20,54 @@ import javax.persistence.Version;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="user_details")
+@Table(name = "user_details")
 public class User implements UserDetails {
 
-    private static final long serialVersionUID = -3648550085103824260L;
-    
-    public static final UserAuthority ROLE_USER = new UserAuthority("ROLE_USER");
+    private static final long         serialVersionUID = -3648550085103824260L;
 
-    public static final UserAuthority ROLE_ADMIN = new UserAuthority("ROLE_ADMIN");
+    public static final UserAuthority ROLE_USER        = new UserAuthority("ROLE_USER");
+
+    public static final UserAuthority ROLE_ADMIN       = new UserAuthority("ROLE_ADMIN");
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long                      id;
 
     @Version
-    private Long version;
-    
+    private Long                      version;
+
     @Column(nullable = false, unique = true)
-    private String username;
-    
-    @Column(nullable = false)
-    private String password;
+    private String                    username;
 
     @Column(nullable = false)
-    private String name;
+    private String                    password;
 
     @Column(nullable = false)
-    private Integer numberOfVisits;
+    private String                    name;
 
     @Column(nullable = false)
-    private boolean enabled;
+    private Integer                   numberOfVisits;
+
+    @Column(nullable = false)
+    private boolean                   enabled;
 
     @Transient
-    private boolean administrator;
-    
+    private boolean                   administrator;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar createDate;
-    
+    private Calendar                  createDate;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar lastUpdatedDate;
+    private Calendar                  lastUpdatedDate;
 
     @Column(nullable = true)
-    private Calendar lastLoginDate;
-    
+    private Calendar                  lastLoginDate;
+
     /** The authorities assigned to this user. */
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<UserAuthority>  authorities;
+    private Collection<UserAuthority> authorities;
 
     /**
      * No parameter constructor required for JPA.
@@ -77,18 +77,18 @@ public class User implements UserDetails {
 
     /**
      * Convenience constructor used in application.
-     * 
+     *
      * @param name name of the user
      */
     public User(final String name) {
         this.name = name;
     }
-    
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -96,7 +96,7 @@ public class User implements UserDetails {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -104,7 +104,7 @@ public class User implements UserDetails {
         return numberOfVisits == null ? 0 : numberOfVisits;
     }
 
-    public void setNumberOfVisits(Integer numberOfVisits) {
+    public void setNumberOfVisits(final Integer numberOfVisits) {
         this.numberOfVisits = numberOfVisits;
     }
 
@@ -113,7 +113,7 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -122,15 +122,16 @@ public class User implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -142,7 +143,7 @@ public class User implements UserDetails {
         return createDate;
     }
 
-    public void setCreateDate(Calendar createDate) {
+    public void setCreateDate(final Calendar createDate) {
         this.createDate = createDate;
     }
 
@@ -150,7 +151,7 @@ public class User implements UserDetails {
         return lastUpdatedDate;
     }
 
-    public void setLastUpdatedDate(Calendar lastUpdatedDate) {
+    public void setLastUpdatedDate(final Calendar lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
@@ -158,7 +159,7 @@ public class User implements UserDetails {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(Calendar lastLoginDate) {
+    public void setLastLoginDate(final Calendar lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 
@@ -170,7 +171,7 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public void setAuthorities(Collection<UserAuthority> authorities) {
+    public void setAuthorities(final Collection<UserAuthority> authorities) {
         this.authorities = authorities;
     }
 
@@ -193,7 +194,7 @@ public class User implements UserDetails {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 }

@@ -20,35 +20,35 @@ import javax.persistence.Version;
 public class Link {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long     id;
 
     @Version
-    private Long version;
-    
+    private Long     version;
+
     @Column(nullable = false, unique = true)
-    private String url;
-    
+    private String   url;
+
     @Column(nullable = false, unique = true)
-    private String name;
-    
+    private String   name;
+
     @Column(nullable = false, unique = true)
-    private String description;
-    
+    private String   description;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar createDate;
 
     @ManyToOne
-    private User createdBy;
+    private User     createdBy;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar lastUpdatedDate;
 
     @ManyToOne
-    private User updatedBy;
-    
+    private User     updatedBy;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tags;
 
@@ -56,7 +56,7 @@ public class Link {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -64,7 +64,7 @@ public class Link {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 
@@ -72,7 +72,7 @@ public class Link {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -80,7 +80,7 @@ public class Link {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -88,7 +88,7 @@ public class Link {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -96,7 +96,7 @@ public class Link {
         return createDate;
     }
 
-    public void setCreateDate(Calendar createDate) {
+    public void setCreateDate(final Calendar createDate) {
         this.createDate = createDate;
     }
 
@@ -104,7 +104,7 @@ public class Link {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(final User createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -112,7 +112,7 @@ public class Link {
         return lastUpdatedDate;
     }
 
-    public void setLastUpdatedDate(Calendar lastUpdatedDate) {
+    public void setLastUpdatedDate(final Calendar lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
@@ -120,7 +120,7 @@ public class Link {
         return updatedBy;
     }
 
-    public void setUpdatedBy(User updatedBy) {
+    public void setUpdatedBy(final User updatedBy) {
         this.updatedBy = updatedBy;
     }
 
@@ -131,8 +131,8 @@ public class Link {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(final Set<Tag> tags) {
         this.tags = tags;
     }
-    
+
 }

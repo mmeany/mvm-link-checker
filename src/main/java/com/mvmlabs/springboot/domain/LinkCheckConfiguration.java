@@ -20,34 +20,34 @@ import javax.persistence.Version;
 public class LinkCheckConfiguration {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long     id;
 
     @Version
-    private Long version;
-    
+    private Long     version;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tags;
 
     @ManyToOne
-    private User createdBy;
-    
+    private User     createdBy;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar createdDate;
-    
+
     @ManyToOne
-    private User updatedBy;
-    
+    private User     updatedBy;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar updatedDate;
-    
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -55,7 +55,7 @@ public class LinkCheckConfiguration {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 
@@ -66,7 +66,7 @@ public class LinkCheckConfiguration {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(final Set<Tag> tags) {
         this.tags = tags;
     }
 
@@ -74,7 +74,7 @@ public class LinkCheckConfiguration {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(final User createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -82,7 +82,7 @@ public class LinkCheckConfiguration {
         return createdDate;
     }
 
-    public void setCreatedDate(Calendar createdDate) {
+    public void setCreatedDate(final Calendar createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -90,7 +90,7 @@ public class LinkCheckConfiguration {
         return updatedBy;
     }
 
-    public void setUpdatedBy(User updatedBy) {
+    public void setUpdatedBy(final User updatedBy) {
         this.updatedBy = updatedBy;
     }
 
@@ -98,7 +98,7 @@ public class LinkCheckConfiguration {
         return updatedDate;
     }
 
-    public void setUpdatedDate(Calendar updatedDate) {
+    public void setUpdatedDate(final Calendar updatedDate) {
         this.updatedDate = updatedDate;
     }
 }

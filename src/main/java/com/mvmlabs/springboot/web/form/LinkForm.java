@@ -16,35 +16,35 @@ import com.mvmlabs.springboot.service.NotFoundException;
 import com.mvmlabs.springboot.service.TagService;
 
 public class LinkForm {
-    
-    @Digits(integer=8, fraction=0)
-    private Long id;
 
-    @Digits(integer=8, fraction=0)
-    private Long version;
-    
+    @Digits(integer = 8, fraction = 0)
+    private Long         id;
+
+    @Digits(integer = 8, fraction = 0)
+    private Long         version;
+
     @NotNull
     @Size(min = 3, max = 80)
-    private String name;
+    private String       name;
 
     @NotNull
     @Size(min = 3, max = 200)
-    private String description;
+    private String       description;
 
     @NotNull
     @Size(min = 6, max = 100)
-    private String url;
+    private String       url;
 
-    private String createDate;
+    private String       createDate;
 
-    private User createdBy;
+    private User         createdBy;
 
-    private String lastUpdatedDate;
+    private String       lastUpdatedDate;
 
-    private User updatedBy;
+    private User         updatedBy;
 
     private List<String> tags;
-    
+
     public LinkForm() {
     }
 
@@ -63,14 +63,14 @@ public class LinkForm {
             this.lastUpdatedDate = sdf.format(link.getLastUpdatedDate().getTime());
         }
         this.updatedBy = link.getUpdatedBy();
-        
+
         if (link.getTags().size() > 0) {
-            for(final Tag tag : link.getTags()) {
+            for (final Tag tag : link.getTags()) {
                 getTags().add(tag.getTag());
             }
         }
     }
-    
+
     public void update(final Link link, final User user, final TagService tagService) {
         final Calendar now = Calendar.getInstance();
         if (link.getCreatedBy() == null) {
@@ -83,12 +83,12 @@ public class LinkForm {
         link.setUpdatedBy(user);
         link.setLastUpdatedDate(now);
         link.setVersion(version);
-        
-        if(getTags().size() > 0) {
-            for(final String name : getTags()) {
+
+        if (getTags().size() > 0) {
+            for (final String name : getTags()) {
                 try {
                     link.getTags().add(tagService.getTag(name.trim()));
-                } catch (NotFoundException e) {
+                } catch (final NotFoundException e) {
                     // Could add this as a new tag
                 }
             }
@@ -99,7 +99,7 @@ public class LinkForm {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -107,7 +107,7 @@ public class LinkForm {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 
@@ -115,7 +115,7 @@ public class LinkForm {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -123,7 +123,7 @@ public class LinkForm {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -131,7 +131,7 @@ public class LinkForm {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -139,7 +139,7 @@ public class LinkForm {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(final String createDate) {
         this.createDate = createDate;
     }
 
@@ -147,7 +147,7 @@ public class LinkForm {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(final User createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -155,7 +155,7 @@ public class LinkForm {
         return lastUpdatedDate;
     }
 
-    public void setLastUpdatedDate(String lastUpdatedDate) {
+    public void setLastUpdatedDate(final String lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
@@ -163,7 +163,7 @@ public class LinkForm {
         return updatedBy;
     }
 
-    public void setUpdatedBy(User updatedBy) {
+    public void setUpdatedBy(final User updatedBy) {
         this.updatedBy = updatedBy;
     }
 
@@ -174,8 +174,8 @@ public class LinkForm {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(final List<String> tags) {
         this.tags = tags;
     }
-    
+
 }

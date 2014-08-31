@@ -14,46 +14,46 @@ import javax.persistence.Version;
 public class LinkCheckResult {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long      id;
 
     @Version
-    private Long version;
-        
-    @ManyToOne
-    @JoinColumn(name="linkcheck_id")
-    private LinkCheck linkCheck;
-    
-    @ManyToOne
-    @JoinColumn(name="link_id")
-    private Link link;
-    
-    @Column(nullable = false)
-    private Integer attempt;
-    
-    @Column(nullable = true)
-    private Integer responseCode;
-    
-    @Column(nullable = true, length=4000)
-    @Lob
-    private String responseHeader;
-    
-    @Column(nullable = true, length=50000)
-    @Lob
-    private String responseBody;
-    
-    @Column(nullable = true, length=4000)
-    private Integer responseSize;
-    
-    @Column(nullable = false)
-    private Long timeTakenMillis;
-    
-    @Column(nullable = false)
-    private Boolean success;
+    private Long      version;
 
-    @Column(nullable = true, length=4000)
+    @ManyToOne
+    @JoinColumn(name = "linkcheck_id")
+    private LinkCheck linkCheck;
+
+    @ManyToOne
+    @JoinColumn(name = "link_id")
+    private Link      link;
+
+    @Column(nullable = false)
+    private Integer   attempt;
+
+    @Column(nullable = true)
+    private Integer   responseCode;
+
+    @Column(nullable = true, length = 4000)
     @Lob
-    private String errorMessage;
+    private String    responseHeader;
+
+    @Column(nullable = true, length = 50000)
+    @Lob
+    private String    responseBody;
+
+    @Column(nullable = true, length = 4000)
+    private Integer   responseSize;
+
+    @Column(nullable = false)
+    private Long      timeTakenMillis;
+
+    @Column(nullable = false)
+    private Boolean   success;
+
+    @Column(nullable = true, length = 4000)
+    @Lob
+    private String    errorMessage;
 
     public LinkCheckResult() {
     }
@@ -72,7 +72,7 @@ public class LinkCheckResult {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -80,7 +80,7 @@ public class LinkCheckResult {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(final Long version) {
         this.version = version;
     }
 
@@ -88,7 +88,7 @@ public class LinkCheckResult {
         return linkCheck;
     }
 
-    public void setLinkCheck(LinkCheck linkCheck) {
+    public void setLinkCheck(final LinkCheck linkCheck) {
         this.linkCheck = linkCheck;
     }
 
@@ -96,7 +96,7 @@ public class LinkCheckResult {
         return link;
     }
 
-    public void setLink(Link link) {
+    public void setLink(final Link link) {
         this.link = link;
     }
 
@@ -104,7 +104,7 @@ public class LinkCheckResult {
         return attempt;
     }
 
-    public void setAttempt(Integer attempt) {
+    public void setAttempt(final Integer attempt) {
         this.attempt = attempt;
     }
 
@@ -112,7 +112,7 @@ public class LinkCheckResult {
         return responseCode;
     }
 
-    public void setResponseCode(Integer responseCode) {
+    public void setResponseCode(final Integer responseCode) {
         this.responseCode = responseCode;
     }
 
@@ -120,7 +120,7 @@ public class LinkCheckResult {
         return responseHeader;
     }
 
-    public void setResponseHeader(String responseHeader) {
+    public void setResponseHeader(final String responseHeader) {
         this.responseHeader = responseHeader;
     }
 
@@ -128,7 +128,7 @@ public class LinkCheckResult {
         return responseBody;
     }
 
-    public void setResponseBody(String responseBody) {
+    public void setResponseBody(final String responseBody) {
         if (responseBody != null) {
             this.responseBody = responseBody.substring(0, 49999);
             this.responseSize = this.responseBody.length();
@@ -142,7 +142,7 @@ public class LinkCheckResult {
         return responseSize;
     }
 
-    public void setResponseSize(Integer responseSize) {
+    public void setResponseSize(final Integer responseSize) {
         this.responseSize = responseSize;
     }
 
@@ -150,7 +150,7 @@ public class LinkCheckResult {
         return timeTakenMillis;
     }
 
-    public void setTimeTakenMillis(Long timeTakenMillis) {
+    public void setTimeTakenMillis(final Long timeTakenMillis) {
         this.timeTakenMillis = timeTakenMillis;
     }
 
@@ -158,7 +158,7 @@ public class LinkCheckResult {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(final Boolean success) {
         this.success = success;
     }
 
@@ -166,7 +166,7 @@ public class LinkCheckResult {
         return errorMessage;
     }
 
-    public void setErrorMessage(String errorMessage) {
+    public void setErrorMessage(final String errorMessage) {
         this.errorMessage = errorMessage;
     }
 }

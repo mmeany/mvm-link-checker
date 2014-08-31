@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Spring Source Tool Suite.
- * 
+ *
  * @author Mark Meany
  */
 @Configuration
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
     }
 }

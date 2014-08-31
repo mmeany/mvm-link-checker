@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Only here to test access restrictions for Spring Security.
- * 
+ *
  * @author Mark Meany
  *
  */
@@ -22,9 +22,9 @@ public class AdminController {
 
     /** Logger implementation. */
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+
     @RequestMapping(value = "/greet/{name}", method = RequestMethod.GET)
-    public String greet(@AuthenticationPrincipal UserDetails user, @PathVariable(value = "name") final String name, final Model model) {
+    public String greet(@AuthenticationPrincipal final UserDetails user, @PathVariable(value = "name") final String name, final Model model) {
         if (user == null) {
             throw new RuntimeException("Authentication error");
         }
